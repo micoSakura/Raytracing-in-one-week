@@ -6,5 +6,5 @@ cmake_minimum_required (VERSION 3.8)
 project ("Raytracing-in-one-week")
 
 # 包含子项目。
-add_subdirectory ("Raytracing-in-one-week")
+add_subdirectory ("Raytracing")
 
