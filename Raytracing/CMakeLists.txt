@@ -5,8 +5,9 @@ cmake_minimum_required (VERSION 3.8)
 
 include_directories(./include)
 # 将源代码添加到此项目的可执行文件。
-add_executable (Raytracing "include/vec3.h" "include/color.h" "include/ray.h" "include/hittable.h" 
-"include/sphere.h" "include/hittable_list.h"  "include/rtweekend.h" "main.cpp"   "include/camera.h")
+add_executable (Raytracing "include/vec3.h" "include/color.h" "include/ray.h" 
+"include/hittable.h" "include/sphere.h" "include/hittable_list.h"  
+"include/rtweekend.h" "main.cpp"   "include/camera.h")
 
 
 
