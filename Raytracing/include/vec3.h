@@ -43,11 +43,12 @@ public:
 		return *this *= 1 / t;
 	}
 
-
+	// 开方
 	double length() const {
 		return sqrt(length_squared());
 	}
 
+	// 平方
 	double length_squared() const {
 		return e[0] * e[0] + e[1] * e[1] + e[2] * e[2];
 	}
@@ -97,7 +98,7 @@ inline vec3 operator* (double t, const vec3& v) {
 }
 // 1*1;
 inline vec3 operator* (const vec3& v, double t) {
-	return v * t;
+	return t * v;
 }
 // except;
 inline vec3 operator/ (vec3 v, double t) {
@@ -127,7 +128,7 @@ inline vec3 random_in_unit_sphere() {
 	{
 		// 2.该范围在-1到+1之间
 		auto p = vec3::random(-1, 1);
-	    // 3.如果在球体之外，continue and turn to 1
+		// 3.如果在球体之外，continue and turn to 1
 		if (p.length_squared() >= 1) continue;
 		// 4.如果在2.内返回该点的值
 		return p;
@@ -150,5 +151,24 @@ vec3 reflect(const vec3& v, const vec3& n) {
 	return v - 2 * dot(v, n) * n;
 }
 
+vec3 refract(const vec3& uv, const vec3& n, double etai_over_etat) {
+	// cos_theta = dot(-R, n)
+	auto cos_theta = fmin(dot(-uv, n), 1.0);
+	// perpendicular 垂直折射光线
+	vec3 r_out_perp = etai_over_etat * (uv + cos_theta * n);
+	// parallel 平行折射光线
+	vec3 r_out_parallel = -sqrt(fabs(1.0 - r_out_perp.length_squared())) * n;
+
+	return r_out_perp + r_out_parallel;
+}
+
+vec3 random_in_unit_disk() {
+	while (true)
+	{
+		auto p = vec3(random_double(-1, 1), random_double(-1, 1), 0);
+		if (p.length_squared() >= 1) continue;
+		return p;
+	}
+}
 
 #endif
