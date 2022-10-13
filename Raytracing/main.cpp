@@ -1,4 +1,4 @@
-// Raytracing in one week.cpp: 定义应用程序的入口点。
+﻿// Raytracing in one week.cpp: 定义应用程序的入口点。
 //
 
 #include <iostream>
@@ -96,7 +96,7 @@ hittable_list ramdom_scene() {
 
 			if ((center - point3(4, 0.2, 0)).length() > 0.9)
 			{
-				shared_ptr<sphere> sphere_material;
+				shared_ptr<material> sphere_material;
 				if (choose_mat < 0.8)
 				{
 					// diffuse
@@ -138,10 +138,10 @@ hittable_list ramdom_scene() {
 int main()
 {
 	// Image
-	const auto aspect_radio = 16.0 / 9.0;
-	const int img_width = 400;
+	const auto aspect_radio = 3.0 / 2.0;
+	const int img_width = 1200;
 	const int img_height = static_cast<int>(img_width / aspect_radio);
-	const int smaples_per_pixel = 100;
+	const int smaples_per_pixel = 500;
 	const int max_depth = 50;
 
 	// World
@@ -159,12 +159,11 @@ int main()
 	world.add(make_shared<sphere>(point3(-1.0, 0.0, -1.0), -0.45, material_left));
 	world.add(make_shared<sphere>(point3(1.0, 0.0, -1.0), 0.5, material_right));*/
 
-	/*auto R = cos(pi / 4);
+	/*auto r = cos(pi / 4);
 	auto material_left = make_shared<lambertian>(color(0, 0, 1));
 	auto material_right = make_shared<lambertian>(color(1, 0, 0));
-
-	world.add(make_shared<sphere>(point3(-R, 0, -1), R, material_left));
-	world.add(make_shared<sphere>(point3(R, 0, -1), R, material_right));*/
+	world.add(make_shared<sphere>(point3(-r, 0, -1), r, material_left));
+	world.add(make_shared<sphere>(point3(r, 0, -1), r, material_right));*/
 
 	// Camare
 	//camera cam(90.0, aspect_radio);
